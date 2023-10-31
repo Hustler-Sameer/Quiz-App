@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/start_screen.dart';
 
 var startAlignment = Alignment.topLeft;
 var endAlignment = Alignment.bottomRight;
@@ -17,32 +18,6 @@ class GradientContainer extends StatelessWidget {
           end: endAlignment,
           colors: [color1, color2],
         )),
-        child: Center(
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset('assets/images/quiz-logo.png', width: 300),
-              const SizedBox(
-                height: 80,
-              ),
-              const Text(
-                'Let us learn Flutter',
-                style: TextStyle(fontSize: 28, color: Colors.white60),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              OutlinedButton(
-                  onPressed: () {
-                    print('Clicked!!');
-                  },
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text('Start Quiz'))
-            ],
-          ),
-        ));
+        child: const StartScreen());
   }
 }
