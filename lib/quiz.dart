@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/gradient_container.dart';
+
 import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/start_screen.dart';
 
@@ -16,7 +16,25 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget activeScreen = StartScreen(swichScreen);
+  // this method cannot be used as the method is created when the active screen is also
+  //also initialized hence we need to use init method.
+  // Widget activeScreen = StartScreen(switchScreen);
+
+  // void switchScreen() {
+  //   setState(() {
+  //     activeScreen = const QuestionsScreen();
+  //   });
+  // }
+
+  // this let us execute before the build method is executed hence no error is caused
+  Widget? activeScreen;
+  // the widget has question mark to indicate that the value can also be null
+  @override
+  void initState() {
+    print('init executed');
+    activeScreen = StartScreen(switchScreen);
+    super.initState();
+  }
 
   void switchScreen() {
     setState(() {
