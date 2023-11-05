@@ -13,39 +13,48 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  var currentQuestionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      currentQuestionIndex = currentQuestionIndex + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final currentQuestion = questions[0];
+    final currentQuestion = questions[currentQuestionIndex];
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            currentQuestion.text,
-            style: const TextStyle(
-              color: Colors.white30,
+      child: Container(
+        margin: const EdgeInsets.all(40),
+        // applying margin to buttons
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              currentQuestion.text,
+              style: const TextStyle(
+                color: Colors.white30,
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: 30),
-          AnswerButton(
-            currentQuestion.answer[0],
-            () {},
-          ),
-          AnswerButton(
-            currentQuestion.answer[1],
-            () {},
-          ),
-          AnswerButton(
-            currentQuestion.answer[2],
-            () {},
-          ),
-          AnswerButton(
-            currentQuestion.answer[3],
-            () {},
-          ),
-        ],
+            const SizedBox(height: 30),
+            ...currentQuestion.getShuffledAnswer().map((answer) {
+              return AnswerButton(answerText: answer, onTap: answerQuestion);
+              // if i have passed the parameters directly then it would have not been positional parameter
+              // it would have been normal other form
+              /*
+              previous
+
+
+              */
+            }),
+          ],
+        ),
       ),
     );
   }
