@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/questions.dart';
 
 import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/start_screen.dart';
+import 'package:quiz_app/results_screen.dart';
 
 var startAlignment = Alignment.topLeft;
 var endAlignment = Alignment.bottomRight;
@@ -12,6 +14,58 @@ class Quiz extends StatefulWidget {
   @override
   State<Quiz> createState() {
     return _QuizState();
+  }
+}
+
+//* using terniary operations to load screen
+
+class _QuizState extends State<Quiz> {
+  List<String> SelectedAnswer = [];
+
+  // we keeping this final as we will not be reassigning the component but we are adding more info in it
+  var activeScreen = 'start-screen';
+
+  void chooseAnswer(String answer) {
+    SelectedAnswer.add(answer);
+    //print(SelectedAnswer);
+
+    if (SelectedAnswer.length == questions.length) {
+      setState(() {
+        activeScreen = 'results-screen';
+        SelectedAnswer = [];
+      });
+    }
+  }
+
+  void switchScreen() {
+    setState(() {
+      activeScreen = 'questions-screen';
+    });
+  }
+
+  @override
+  Widget build(context) {
+    if (activeScreen == 'results-screen') {
+      return ResultsScreen();
+    }
+    return MaterialApp(
+        title: 'Flutter Demo',
+        home: Scaffold(
+          body: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              begin: startAlignment,
+              end: endAlignment,
+              colors: const [
+                Color.fromARGB(90, 0, 0, 0),
+                Color.fromARGB(200, 53, 4, 4)
+              ],
+            )),
+            child: activeScreen == 'start-screen'
+                ? StartScreen(switchScreen)
+                : QuestionsScreen(onSelectedAnswer: chooseAnswer),
+          ),
+        ));
   }
 }
 
@@ -62,37 +116,3 @@ class Quiz extends StatefulWidget {
 //                 child: activeScreen)));
 //   }
 // }
-
-//* using terniary operations to load screen
-
-class _QuizState extends State<Quiz> {
-  var activeScreen = 'start-screen';
-
-  void switchScreen() {
-    setState(() {
-      activeScreen = 'questions-screen';
-    });
-  }
-
-  @override
-  Widget build(context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        home: Scaffold(
-          body: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-              begin: startAlignment,
-              end: endAlignment,
-              colors: const [
-                Color.fromARGB(90, 0, 0, 0),
-                Color.fromARGB(200, 53, 4, 4)
-              ],
-            )),
-            child: activeScreen == 'start-screen'
-                ? StartScreen(switchScreen)
-                : const QuestionsScreen(),
-          ),
-        ));
-  }
-}

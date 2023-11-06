@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StartScreen extends StatelessWidget {
   // here we are accepting a function as a positional argument so that we can use that to point to setScreen
@@ -19,9 +20,12 @@ class StartScreen extends StatelessWidget {
           const SizedBox(
             height: 80,
           ),
-          const Text(
+          Text(
             'Let us learn Flutter',
-            style: TextStyle(fontSize: 28, color: Colors.white60),
+            style: GoogleFonts.lato(
+                color: Colors.white54,
+                fontSize: 24,
+                fontWeight: FontWeight.bold),
           ),
           const SizedBox(
             height: 20,
