@@ -19,13 +19,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
   void answerQuestion(String selectedAnswer) {
-    widget.onSelectedAnswer('');
+    widget.onSelectedAnswer(selectedAnswer); // doubt
     // here we passed empty string
     // at first we are creating an empty function
     // here we are accessing the property in state class
 
     setState(() {
-      currentQuestionIndex = currentQuestionIndex + 1;
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex = currentQuestionIndex + 1;
+      }
     });
   }
 
