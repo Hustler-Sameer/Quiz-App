@@ -32,7 +32,7 @@ class StartScreen extends StatelessWidget {
           ),
           OutlinedButton(
               onPressed: () {
-                print('Clicked!!');
+                // print('Clicked!!');
                 startQuiz();
                 // here now we are executing the function as the anoynomous function body will
                 // will be executed only once the button is pressed

@@ -25,9 +25,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     // here we are accessing the property in state class
 
     setState(() {
-      if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex = currentQuestionIndex + 1;
-      }
+      currentQuestionIndex = currentQuestionIndex + 1;
     });
   }
 
